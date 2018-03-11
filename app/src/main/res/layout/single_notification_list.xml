@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sender_list_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="15dp"
+        android:src="@mipmap/default_profile_picture" />
+
+    <TextView
+        android:id="@+id/sender_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sender_list_image"
+        android:layout_toEndOf="@+id/sender_list_image"
+        android:padding="15dp"
+        android:text="Loading Name..."
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/message_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/sender_name"
+        android:layout_below="@+id/sender_list_image"
+        android:padding="10dp"
+        android:text="Loading Message..."
+        android:textColor="@android:color/background_dark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/message_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sender_name"
+        android:layout_alignBottom="@+id/sender_name"
+        android:layout_alignParentEnd="true"
+        android:padding="2dp"
+        android:text="Loading Time..."
+        android:textSize="13sp"
+        android:textStyle="italic" />
+
+</RelativeLayout>

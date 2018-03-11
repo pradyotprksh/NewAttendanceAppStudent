@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "23920932548",
+    "firebase_url": "https://newattendanceapp.firebaseio.com",
+    "project_id": "newattendanceapp",
+    "storage_bucket": "newattendanceapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23920932548:android:c1f6a9ccb7e95ba1",
+        "android_client_info": {
+          "package_name": "com.application.pradyotprakash.newattendanceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23920932548-9iteghg6vk96hdlvclsrdoofj3oraheg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.application.pradyotprakash.newattendanceapp",
+            "certificate_hash": "099ce875e5ef48694c8c33872a25c8c4ebf8641d"
+          }
+        },
+        {
+          "client_id": "23920932548-a0e1nj8ihfc9utsdbs6nrtpouomr1el1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmwA2y6LkaU8S1BPm7QQL6-rk61Q0ePgs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23920932548-a0e1nj8ihfc9utsdbs6nrtpouomr1el1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
