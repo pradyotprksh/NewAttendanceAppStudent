@@ -6,15 +6,33 @@ package com.application.pradyotprakash.newattendanceapp;
 
 public class Home {
 
-    String from, to, subject;
+    String from, to, subjectName, subjectCode, subjectTeacher;
 
-    public Home(String from, String to, String subject) {
+    public Home(String from, String to, String subjectName, String subjectCode, String subjectTeacher) {
         this.from = from;
         this.to = to;
-        this.subject = subject;
+        this.subjectName = subjectName;
+        this.subjectCode = subjectCode;
+        this.subjectTeacher = subjectTeacher;
     }
 
     public Home() {
+    }
+
+    public String getSubjectCode() {
+        return subjectCode;
+    }
+
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
+    }
+
+    public String getSubjectTeacher() {
+        return subjectTeacher;
+    }
+
+    public void setSubjectTeacher(String subjectTeacher) {
+        this.subjectTeacher = subjectTeacher;
     }
 
     public String getFrom() {
@@ -33,11 +51,11 @@ public class Home {
         this.to = to;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }

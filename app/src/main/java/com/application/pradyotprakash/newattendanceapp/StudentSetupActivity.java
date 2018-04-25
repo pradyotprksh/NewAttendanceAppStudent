@@ -36,7 +36,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -56,7 +55,7 @@ public class StudentSetupActivity extends AppCompatActivity {
     private boolean isChanged = false;
     private ImageView branchSpinner, semesterSpinner;
     private static final String[] branch = new String[]{"Bio Technology Engineering", "Civil Engineering", "Computer Science Engineering", "Electrical & Electronics Engineering", "Electronics & Comm. Engineering", "Information Science & Engineering", "Mechanical Engineering"};
-    private static final String[] semester = new String[]{"Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6"};
+    private static final String[] semester = new String[]{"Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class StudentSetupActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Your Details");
         studentSetupProgress = findViewById(R.id.student_setup_progress);
         studentSetupImage = findViewById(R.id.student_setup_image);
-        studentSetupBtn = findViewById(R.id.student_setup_btn);
+        studentSetupBtn = findViewById(R.id.other_semester_details);
         studentName = findViewById(R.id.student_setup_name);
         studentUsn = findViewById(R.id.student_setup_usn);
         studentClass = findViewById(R.id.student_setup_class);
@@ -197,8 +196,8 @@ public class StudentSetupActivity extends AppCompatActivity {
                                     Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) &&
                             (ContextCompat.
                                     checkSelfPermission(StudentSetupActivity.this,
-                                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-                        ActivityCompat.requestPermissions(StudentSetupActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+                        ActivityCompat.requestPermissions(StudentSetupActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                         ActivityCompat.requestPermissions(StudentSetupActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     } else {
                         cropImage();

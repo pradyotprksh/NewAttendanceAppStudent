@@ -62,10 +62,14 @@
             android:parentActivityName=".StudentMainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.application.pradyotprakash.newattendanceapp.pushnotification.TARGET"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="com.application.pradyotprakash.newattendanceapp.pushnotification.TARGET" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".EachSubjectStudentDetails" />
+        <activity android:name=".EachSubjectStudentMarks" />
+        <activity android:name=".OtherSemesterDetails"></activity>
     </application>
 
 </manifest>

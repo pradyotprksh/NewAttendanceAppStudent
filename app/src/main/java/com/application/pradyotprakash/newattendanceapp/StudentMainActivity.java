@@ -61,6 +61,18 @@ public class StudentMainActivity extends AppCompatActivity {
                 sendToSetup();
             }
         });
+        studentMainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendToSetup();
+            }
+        });
+        student_main_toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendToSetup();
+            }
+        });
         studentMainBottomNavigation = findViewById(R.id.studentBottomNavigation);
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
