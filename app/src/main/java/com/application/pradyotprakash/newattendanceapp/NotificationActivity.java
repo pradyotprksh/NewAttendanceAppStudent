@@ -75,12 +75,4 @@ public class NotificationActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(NotificationActivity.this, StudentMainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }
