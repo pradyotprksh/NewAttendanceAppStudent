@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,14 +30,18 @@ public class OtherSemesterDetails extends AppCompatActivity {
     private ImageView semesterSpinner;
     private static String[] semester = new String[]{};
     private RecyclerView mSubjectListView;
-    private List<StudentSubjects> subjectList;
-    private StudentSubjectRecyclerAdapter subjectRecyclerAdapter;
+    private List<OtherSemesterSubjectCode> subjectList;
+    private OtherSemesterStudentSubjectRecyclerAdapter subjectRecyclerAdapter;
     private FirebaseFirestore mFirestore;
+    private FirebaseAuth mAuth;
+    private static String studentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_semester_details);
+        mAuth = FirebaseAuth.getInstance();
+        studentId = mAuth.getCurrentUser().getUid();
         currentSemester = getIntent().getStringExtra("currentSemester");
         branch = getIntent().getStringExtra("branch");
         if (currentSemester.equals("Semester 2")) {
@@ -73,7 +78,7 @@ public class OtherSemesterDetails extends AppCompatActivity {
         });
         mSubjectListView = findViewById(R.id.subjectList);
         subjectList = new ArrayList<>();
-        subjectRecyclerAdapter = new StudentSubjectRecyclerAdapter(subjectList, OtherSemesterDetails.this);
+        subjectRecyclerAdapter = new OtherSemesterStudentSubjectRecyclerAdapter(subjectList, OtherSemesterDetails.this);
         mSubjectListView.setHasFixedSize(true);
         mSubjectListView.setLayoutManager(new LinearLayoutManager(OtherSemesterDetails.this));
         mSubjectListView.setAdapter(subjectRecyclerAdapter);
@@ -94,12 +99,12 @@ public class OtherSemesterDetails extends AppCompatActivity {
                 subjectRecyclerAdapter.notifyDataSetChanged();
                 semesterValue = semesterOption.getText().toString();
                 if (!TextUtils.isEmpty(semesterValue)) {
-                    mFirestore.collection("Subject").document(branch).collection(semesterValue).addSnapshotListener(OtherSemesterDetails.this, new EventListener<QuerySnapshot>() {
+                    mFirestore.collection("Student").document(studentId).collection(semesterValue).addSnapshotListener(OtherSemesterDetails.this, new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                             for (DocumentChange documentChange : documentSnapshots.getDocumentChanges()) {
                                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                    StudentSubjects timetableClasses = documentChange.getDocument().toObject(StudentSubjects.class);
+                                    OtherSemesterSubjectCode timetableClasses = documentChange.getDocument().toObject(OtherSemesterSubjectCode.class);
                                     subjectList.add(timetableClasses);
                                     subjectRecyclerAdapter.notifyDataSetChanged();
                                 }

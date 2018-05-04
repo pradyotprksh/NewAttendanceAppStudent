@@ -69,7 +69,8 @@
         </activity>
         <activity android:name=".EachSubjectStudentDetails" />
         <activity android:name=".EachSubjectStudentMarks" />
-        <activity android:name=".OtherSemesterDetails"></activity>
+        <activity android:name=".OtherSemesterDetails" />
+        <activity android:name=".OtherSemesterEachSubjectStudentDetails"></activity>
     </application>
 
 </manifest>

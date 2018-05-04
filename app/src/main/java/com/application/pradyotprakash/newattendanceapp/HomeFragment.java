@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment {
                                                         newNoteslist.add(newNotes);
                                                     }
                                                 }
-                                                for (position = 0; position < 2; position++) {
+                                                for (position = 0; position < newNoteslist.size(); position++) {
                                                     if (position == 0) {
                                                         noteName.setVisibility(View.VISIBLE);
                                                         noteDescription.setVisibility(View.VISIBLE);
@@ -233,7 +233,7 @@ public class HomeFragment extends Fragment {
                                                         newNoteslist.add(newNotes);
                                                     }
                                                 }
-                                                for (position = 0; position < 2; position++) {
+                                                for (position = 0; position < newNoteslist.size(); position++) {
                                                     if (position == 0) {
                                                         fileLink = newNoteslist.get(position).getNoteLink();
                                                         fileLink = newNoteslist.get(position).getNoteLink();
@@ -275,7 +275,7 @@ public class HomeFragment extends Fragment {
                                                         newNoteslist.add(newNotes);
                                                     }
                                                 }
-                                                for (position = 0; position < 2; position++) {
+                                                for (position = 0; position < newNoteslist.size(); position++) {
                                                     if (position == 1) {
                                                         fileLink = newNoteslist.get(position).getNoteLink();
                                                         fileLink = newNoteslist.get(position).getNoteLink();
