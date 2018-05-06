@@ -178,17 +178,14 @@ public class DetailsFragment extends Fragment {
         otherSemesterDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (semester.equals("Semester 1")) {
-//                    Toast.makeText(getContext(), "You are in the first semester.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Intent intent = new Intent(getContext(), OtherSemesterDetails.class);
-//                    intent.putExtra("currentSemester", semester);
-//                    startActivity(intent);
-//                }
-                Intent intent = new Intent(getContext(), OtherSemesterDetails.class);
-                intent.putExtra("currentSemester", semester);
-                intent.putExtra("branch", branch);
-                startActivity(intent);
+                if (semester.equals("Semester 1")) {
+                    Toast.makeText(getContext(), "You are in the first semester.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), OtherSemesterDetails.class);
+                    intent.putExtra("currentSemester", semester);
+                    intent.putExtra("branch", branch);
+                    startActivity(intent);
+                }
             }
         });
         return view;

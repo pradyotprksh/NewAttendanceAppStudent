@@ -12,7 +12,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="Date"
+        android:text="@string/date"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -25,7 +25,7 @@
         android:layout_alignTop="@+id/dateValue"
         android:layout_marginEnd="22dp"
         android:padding="10dp"
-        android:text="Absent"
+        android:text="@string/absent"
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 
@@ -36,7 +36,7 @@
         android:layout_alignStart="@+id/dateValue"
         android:layout_below="@+id/statusValue"
         android:padding="10dp"
-        android:text="Time"
+        android:text="@string/time"
         android:textSize="16sp" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_below="@+id/statusValue"
         android:layout_marginBottom="5dp"
         android:padding="10dp"
-        android:text="Class Time Value"
+        android:text="@string/class_time_value"
         android:textSize="16sp" />
 
 </RelativeLayout>

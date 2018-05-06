@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="85dp"
         android:ems="10"
-        android:hint="Select Semester"
+        android:hint="@string/select_semester"
         android:padding="16dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,8 @@
         android:src="@drawable/ic_arrow_drop_down_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/faculty_selectclass"
-        app:layout_constraintTop_toTopOf="@+id/faculty_selectclass" />
+        app:layout_constraintTop_toTopOf="@+id/faculty_selectclass"
+        android:contentDescription="@string/todo" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/subjectList"

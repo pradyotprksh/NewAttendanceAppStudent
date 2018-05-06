@@ -17,7 +17,7 @@
         android:layout_alignBottom="@+id/sender_list_image"
         android:layout_toEndOf="@+id/sender_list_image"
         android:padding="15dp"
-        android:text="Loading Name..."
+        android:text="@string/loading_name"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_alignStart="@+id/sender_name"
         android:layout_below="@+id/sender_list_image"
         android:padding="10dp"
-        android:text="Loading Message..."
+        android:text="@string/loading_message"
         android:textColor="@android:color/background_dark"
         android:textSize="16sp" />
 
@@ -41,7 +41,7 @@
         android:layout_alignBottom="@+id/sender_name"
         android:layout_alignParentEnd="true"
         android:padding="2dp"
-        android:text="Loading Time..."
+        android:text="@string/loading_time"
         android:textSize="13sp"
         android:textStyle="italic" />
 

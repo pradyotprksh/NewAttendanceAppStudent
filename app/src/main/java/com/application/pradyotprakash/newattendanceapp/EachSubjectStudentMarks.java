@@ -29,8 +29,6 @@ public class EachSubjectStudentMarks extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.adminSetupToolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Marks");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         externalMarks = findViewById(R.id.externalMarks);
         internal1Marks = findViewById(R.id.interanl1Marks);
         internal2Marks = findViewById(R.id.interanl2Marks);

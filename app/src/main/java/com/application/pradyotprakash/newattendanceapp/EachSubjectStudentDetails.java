@@ -50,8 +50,6 @@ public class EachSubjectStudentDetails extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.studentSubjectToolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(subjectCode + " Details");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         daysAttended = findViewById(R.id.daysAttended);
         currentPercentage = findViewById(R.id.currentPercentage);
         mFirestore = FirebaseFirestore.getInstance();

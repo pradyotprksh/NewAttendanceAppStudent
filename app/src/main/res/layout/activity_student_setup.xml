@@ -58,7 +58,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/student_setup_semester"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/branch_spinner"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.846"
+        android:contentDescription="@string/todo" />
 
     <EditText
         android:id="@+id/student_setup_name"
@@ -142,7 +143,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/student_setup_branch"
         app:layout_constraintTop_toBottomOf="@+id/student_setup_class"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.714"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/other_semester_details"

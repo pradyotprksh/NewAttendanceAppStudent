@@ -64,8 +64,6 @@ public class OtherSemesterDetails extends AppCompatActivity {
         mToolbar = findViewById(R.id.faculty_selectsemester_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Previous Semester Details");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         semesterOption = findViewById(R.id.faculty_selectclass);
         semesterSpinner = findViewById(R.id.semester_spinner);
         ArrayAdapter<String> adapterSemester = new ArrayAdapter<>(OtherSemesterDetails.this, android.R.layout.simple_dropdown_item_1line, semester);

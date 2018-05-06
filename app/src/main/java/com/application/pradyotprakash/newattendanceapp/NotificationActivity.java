@@ -1,6 +1,5 @@
 package com.application.pradyotprakash.newattendanceapp;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +33,6 @@ public class NotificationActivity extends AppCompatActivity {
         student_notification_toolbar = findViewById(R.id.student_notification_toolbar);
         setSupportActionBar(student_notification_toolbar);
         getSupportActionBar().setTitle("Message Details");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         dataMessage = getIntent().getStringExtra("message");
         dataFrom = getIntent().getStringExtra("from_user_id");
         dataDesignation = getIntent().getStringExtra("from_designation");

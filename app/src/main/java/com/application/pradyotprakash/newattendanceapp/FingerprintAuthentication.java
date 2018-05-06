@@ -1,6 +1,5 @@
 package com.application.pradyotprakash.newattendanceapp;
 
-import android.*;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;

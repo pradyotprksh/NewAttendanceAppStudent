@@ -42,6 +42,7 @@ public class StudentMainActivity extends AppCompatActivity {
     private NotificationFragment notificationFragment;
     private NotesFragment notesFragment;
     private DetailsFragment detailsFragment;
+    private EventFragment eventFragment;
     private static String classValue;
 
     @Override
@@ -74,10 +75,12 @@ public class StudentMainActivity extends AppCompatActivity {
             }
         });
         studentMainBottomNavigation = findViewById(R.id.studentBottomNavigation);
+        studentMainBottomNavigation.setEnabled(true);
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         notesFragment = new NotesFragment();
         detailsFragment = new DetailsFragment();
+        eventFragment = new EventFragment();
         studentMainBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -90,6 +93,9 @@ public class StudentMainActivity extends AppCompatActivity {
                         return true;
                     case R.id.btm_notes:
                         replaceFragment(notesFragment);
+                        return true;
+                    case R.id.btm_events:
+                        replaceFragment(eventFragment);
                         return true;
                     case R.id.btm_details:
                         replaceFragment(detailsFragment);
@@ -124,7 +130,7 @@ public class StudentMainActivity extends AppCompatActivity {
                             placeHolderRequest.placeholder(R.mipmap.default_profile_picture);
                             Glide.with(StudentMainActivity.this).setDefaultRequestOptions(placeHolderRequest).load(image).into(studentMainImage);
                             if (classValue != null) {
-                                replaceFragment(homeFragment);
+                                studentMainBottomNavigation.setEnabled(false);
                             }
                         }
                     } else {

@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="19dp"
-        android:text="No Class"
+        android:text="@string/no_class"
         android:textSize="18sp" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_below="@+id/subject_code"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="12dp"
-        android:text="No Class"
+        android:text="@string/no_class"
         android:textSize="18sp" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_alignEnd="@+id/subject_value"
         android:layout_alignTop="@+id/time_value"
         android:gravity="right"
-        android:text="Loading Name"
+        android:text="@string/loading_name_value"
         android:textSize="18sp" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/subject_code"
         android:layout_marginEnd="20dp"
-        android:text="No Class"
+        android:text="@string/no_class"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
