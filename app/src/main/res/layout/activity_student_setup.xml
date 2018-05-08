@@ -53,13 +53,13 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/todo"
         android:padding="5dp"
         android:src="@drawable/ic_arrow_drop_down_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/student_setup_semester"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/branch_spinner"
-        app:layout_constraintVertical_bias="0.846"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintVertical_bias="0.846" />
 
     <EditText
         android:id="@+id/student_setup_name"
@@ -137,14 +137,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/todo"
         android:padding="5dp"
         android:src="@drawable/ic_arrow_drop_down_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/student_setup_branch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/student_setup_branch"
         app:layout_constraintTop_toBottomOf="@+id/student_setup_class"
-        app:layout_constraintVertical_bias="0.714"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <Button
         android:id="@+id/other_semester_details"
@@ -153,6 +153,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="268dp"
+        android:background="@drawable/button_layout_background"
         android:backgroundTint="@color/colorAccent"
         android:padding="16dp"
         android:text="@string/student_setup_btn_text"

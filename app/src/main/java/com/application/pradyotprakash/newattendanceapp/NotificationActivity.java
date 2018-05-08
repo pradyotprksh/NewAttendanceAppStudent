@@ -12,8 +12,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +31,10 @@ public class NotificationActivity extends AppCompatActivity {
     private String dataMessage, dataFrom, dataDesignation, name, image, messageOnValue;
     private FirebaseFirestore mFirestore;
     private Uri senderImageURI = null;
+    private LikeButton starBtn;
+    private FirebaseFirestore mFirestore1, mFirestore2;
+    private String user_id, notificationId;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,7 @@ public class NotificationActivity extends AppCompatActivity {
         dataFrom = getIntent().getStringExtra("from_user_id");
         dataDesignation = getIntent().getStringExtra("from_designation");
         messageOnValue = getIntent().getStringExtra("message_on");
+        notificationId = getIntent().getStringExtra("notificationId");
         senderName = findViewById(R.id.sender_name);
         senderMessage = findViewById(R.id.sender_message);
         messageOn = findViewById(R.id.message_on);
@@ -71,5 +82,69 @@ public class NotificationActivity extends AppCompatActivity {
                         }
                     }
                 });
+        starBtn = findViewById(R.id.star_button);
+        mFirestore1 = FirebaseFirestore.getInstance();
+        mFirestore2 = FirebaseFirestore.getInstance();
+        starBtn.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                HashMap<String, Object> likedNotification = new HashMap<>();
+                likedNotification.put("liked", "true");
+                mFirestore1.collection("Student").document(user_id).collection("Notifications").document(notificationId).update(likedNotification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            String image_error = task.getException().getMessage();
+                            Toast.makeText(NotificationActivity.this, "Error: " + image_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                HashMap<String, Object> likedNotification = new HashMap<>();
+                likedNotification.put("liked", FieldValue.delete());
+                mFirestore1.collection("Student").document(user_id).collection("Notifications").document(notificationId).update(likedNotification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            String image_error = task.getException().getMessage();
+                            Toast.makeText(NotificationActivity.this, "Error: " + image_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        user_id = mAuth.getCurrentUser().getUid();
+        try {
+            mFirestore1.collection("Student").document(user_id).collection("Notifications").document(notificationId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        if (task.getResult().exists()) {
+                            try {
+                                String liked = task.getResult().getString("liked");
+                                if (liked.equals("true")) {
+                                    starBtn.setLiked(true);
+                                } else {
+                                    starBtn.setLiked(false);
+                                }
+                            } catch (Exception e) {
+                                starBtn.setLiked(false);
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
+        }
+    }
+
 }

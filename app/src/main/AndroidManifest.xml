@@ -59,7 +59,6 @@
 
         <activity
             android:name=".NotificationActivity"
-            android:parentActivityName=".StudentMainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.application.pradyotprakash.newattendanceapp.pushnotification.TARGET" />
@@ -67,11 +66,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".EachSubjectStudentDetails" />
-        <activity android:name=".EachSubjectStudentMarks" />
-        <activity android:name=".OtherSemesterDetails" />
-        <activity android:name=".OtherSemesterEachSubjectStudentDetails" />
-        <activity android:name=".EachEventInformation" />
+        <activity
+            android:name=".EachSubjectStudentDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EachSubjectStudentMarks"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OtherSemesterDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OtherSemesterEachSubjectStudentDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EachEventInformation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

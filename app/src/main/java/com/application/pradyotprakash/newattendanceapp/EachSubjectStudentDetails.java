@@ -102,10 +102,10 @@ public class EachSubjectStudentDetails extends AppCompatActivity {
                                             daysAttended.setText("Days Attended: " + String.valueOf(task.getResult().getDouble("daysAttended")) + " out of " + String.valueOf(task.getResult().getDouble("totalDays")));
                                             Double percentage = task.getResult().getDouble("percentage");
                                             if (percentage < 75.0) {
-                                                currentPercentage.setText("Percentage: " + String.valueOf(percentage));
+                                                currentPercentage.setText("Percentage: " + String.format("%.2f", percentage));
                                                 currentPercentage.setTextColor(Color.rgb(244, 67, 54));
                                             } else {
-                                                currentPercentage.setText("Percentage: " + String.valueOf(percentage));
+                                                currentPercentage.setText("Percentage: " + String.format("%.2f", percentage));
                                             }
                                         } catch (Exception e) {
                                             daysAttended.setText("No Classes Till Now.");

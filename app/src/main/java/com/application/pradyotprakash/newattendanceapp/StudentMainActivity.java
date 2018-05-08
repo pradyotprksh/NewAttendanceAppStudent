@@ -1,5 +1,7 @@
 package com.application.pradyotprakash.newattendanceapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,7 +78,7 @@ public class StudentMainActivity extends AppCompatActivity {
             }
         });
         studentMainBottomNavigation = findViewById(R.id.studentBottomNavigation);
-        studentMainBottomNavigation.setEnabled(true);
+        studentMainBottomNavigation.setEnabled(false);
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         notesFragment = new NotesFragment();
@@ -129,9 +132,7 @@ public class StudentMainActivity extends AppCompatActivity {
                             RequestOptions placeHolderRequest = new RequestOptions();
                             placeHolderRequest.placeholder(R.mipmap.default_profile_picture);
                             Glide.with(StudentMainActivity.this).setDefaultRequestOptions(placeHolderRequest).load(image).into(studentMainImage);
-                            if (classValue != null) {
-                                studentMainBottomNavigation.setEnabled(false);
-                            }
+                            studentMainBottomNavigation.setEnabled(true);
                         }
                     } else {
                         String retrieving_error = task.getException().getMessage();
@@ -172,15 +173,35 @@ public class StudentMainActivity extends AppCompatActivity {
     }
 
     private void logOut() {
-        Map<String, Object> tokenRemoveMap = new HashMap<>();
-        tokenRemoveMap.put("token_id", FieldValue.delete());
-        studentMainFirestore.collection("Student").document(user_id).update(tokenRemoveMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                mAuth.signOut();
-                sendToLogin();
-            }
-        });
+        LayoutInflater li = LayoutInflater.from(StudentMainActivity.this);
+        View promptsView = li.inflate(R.layout.prompts1, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                StudentMainActivity.this);
+        alertDialogBuilder.setView(promptsView);
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Map<String, Object> tokenRemoveMap = new HashMap<>();
+                                tokenRemoveMap.put("token_id", FieldValue.delete());
+                                studentMainFirestore.collection("Student").document(user_id).update(tokenRemoveMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        mAuth.signOut();
+                                        sendToLogin();
+                                    }
+                                });
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void sendToLogin() {

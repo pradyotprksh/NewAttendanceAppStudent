@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.like.LikeButton;
 
 import java.util.List;
 
@@ -36,10 +37,21 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final String notificationId = notificationList.get(position).notificationId;
         holder.from.setText(notificationList.get(position).getSenderName());
         CircleImageView mImageView = holder.mImage;
         Glide.with(context).load(notificationList.get(position).getSenderImage()).into(mImageView);
         String message = notificationList.get(position).getMessage();
+        String likedValue = notificationList.get(position).getLiked();
+        try {
+            if (likedValue.equals("true")) {
+                holder.starValue.setLiked(true);
+            } else {
+                holder.starValue.setLiked(false);
+            }
+        } catch (Exception e) {
+            holder.starValue.setLiked(false);
+        }
         if (message.length() >= 15) {
             message = message.substring(0, Math.min(message.length(), 10));
             message = message + "...";
@@ -56,6 +68,7 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
                 notificationIndent.putExtra("from_user_id", notificationList.get(position).getFrom());
                 notificationIndent.putExtra("from_designation", notificationList.get(position).getDesignation());
                 notificationIndent.putExtra("message_on", notificationList.get(position).getOn());
+                notificationIndent.putExtra("notificationId", notificationId);
                 context.startActivity(notificationIndent);
             }
         });
@@ -71,6 +84,7 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
         private View mView;
         private TextView message, from, on;
         private CircleImageView mImage;
+        private LikeButton starValue;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +93,7 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
             from = mView.findViewById(R.id.sender_name);
             on = mView.findViewById(R.id.message_on);
             mImage = mView.findViewById(R.id.sender_list_image);
+            starValue = mView.findViewById(R.id.star_button);
         }
     }
 }

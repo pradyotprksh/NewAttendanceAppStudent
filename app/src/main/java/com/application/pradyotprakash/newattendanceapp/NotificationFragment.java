@@ -68,7 +68,8 @@ public class NotificationFragment extends Fragment {
                     if (doc.getType() == DocumentChange.Type.ADDED) {
                         mNotificationListView.setVisibility(View.VISIBLE);
                         noNotificationBanner.setVisibility(View.GONE);
-                        Notification notification = doc.getDocument().toObject(Notification.class);
+                        String notification_id = doc.getDocument().getId();
+                        Notification notification = doc.getDocument().toObject(Notification.class).withId(notification_id);
                         notificationList.add(notification);
                         notificationRecyclerAdapter.notifyDataSetChanged();
                     }

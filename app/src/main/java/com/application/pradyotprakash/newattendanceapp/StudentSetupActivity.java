@@ -230,11 +230,12 @@ public class StudentSetupActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(StudentSetupActivity.this, "Check All The Details Before Leaving This Page.", Toast.LENGTH_LONG).show();
+                    studentSetupProgress.setVisibility(View.INVISIBLE);
                 } else {
                     String image_error = task.getException().getMessage();
                     Toast.makeText(StudentSetupActivity.this, "Error: " + image_error, Toast.LENGTH_SHORT).show();
+                    studentSetupProgress.setVisibility(View.INVISIBLE);
                 }
-                studentSetupProgress.setVisibility(View.INVISIBLE);
             }
         });
     }
