@@ -1,8 +1,11 @@
 package com.application.pradyotprakash.newattendanceapp;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +26,12 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
 
     private List<Notification> notificationList;
     private Context context;
+    private Activity activity;
 
-    public NotificationRecyclerActivity(List<Notification> notificationList, Context context) {
+    public NotificationRecyclerActivity(List<Notification> notificationList, Context context, Activity activity) {
         this.notificationList = notificationList;
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -69,7 +74,15 @@ public class NotificationRecyclerActivity extends RecyclerView.Adapter<Notificat
                 notificationIndent.putExtra("from_designation", notificationList.get(position).getDesignation());
                 notificationIndent.putExtra("message_on", notificationList.get(position).getOn());
                 notificationIndent.putExtra("notificationId", notificationId);
-                context.startActivity(notificationIndent);
+                Pair[] pairs = new Pair[5];
+                pairs[0] = new Pair<View, String>(holder.mImage, "imageTransition");
+                pairs[1] = new Pair<View, String>(holder.from, "nameTransition");
+                pairs[2] = new Pair<View, String>(holder.message, "messageTransition");
+                pairs[3] = new Pair<View, String>(holder.on, "timeTransition");
+                pairs[4] = new Pair<View, String>(holder.starValue, "starTransaction");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                        pairs);
+                context.startActivity(notificationIndent, options.toBundle());
             }
         });
     }

@@ -55,7 +55,7 @@ public class NotificationFragment extends Fragment {
         mNotificationListView = view.findViewById(R.id.notification_list);
         mNotificationListView.setVisibility(View.GONE);
         notificationList = new ArrayList<>();
-        notificationRecyclerAdapter = new NotificationRecyclerActivity(notificationList, getContext());
+        notificationRecyclerAdapter = new NotificationRecyclerActivity(notificationList, getContext(), getActivity());
         mNotificationListView.setHasFixedSize(true);
         mNotificationListView.setLayoutManager(new LinearLayoutManager(getContext()));
         mNotificationListView.setAdapter(notificationRecyclerAdapter);

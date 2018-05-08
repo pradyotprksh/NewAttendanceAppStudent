@@ -21,6 +21,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         android:textStyle="bold|italic"
+        android:transitionName="timeTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="96dp"
         android:src="@mipmap/default_profile_picture"
+        android:transitionName="imageTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +66,7 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:transitionName="nameTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sender_image" />
@@ -80,6 +83,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
+        android:transitionName="messageTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sender_name" />
@@ -90,16 +94,17 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:transitionName="starTransaction"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.like.LikeButton
-            app:icon_type="star"
-            app:icon_size="40dp"
             android:id="@+id/star_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:icon_size="40dp"
+            app:icon_type="star" />
 
     </LinearLayout>
 

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/sender_list_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="15dp"
-        android:src="@mipmap/default_profile_picture" />
+        android:src="@mipmap/default_profile_picture"
+        android:transitionName="imageTransition" />
 
     <TextView
         android:id="@+id/sender_name"
@@ -21,7 +22,8 @@
         android:text="@string/loading_name"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:transitionName="nameTransition" />
 
     <TextView
         android:id="@+id/message_value"
@@ -32,7 +34,8 @@
         android:padding="10dp"
         android:text="@string/loading_message"
         android:textColor="@android:color/background_dark"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:transitionName="messageTransition" />
 
     <TextView
         android:id="@+id/message_on"
@@ -44,14 +47,16 @@
         android:padding="2dp"
         android:text="@string/loading_time"
         android:textSize="13sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:transitionName="timeTransition" />
 
     <LinearLayout
         android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/sender_list_image"
         android:layout_below="@+id/sender_list_image"
-        android:layout_marginTop="-20dp">
+        android:layout_marginTop="-20dp"
+        android:transitionName="starTransaction">
 
         <com.like.LikeButton
             android:id="@+id/star_button"
