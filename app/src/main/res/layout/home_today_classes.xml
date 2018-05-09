@@ -9,8 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="42dp"
+        android:padding="5dp"
         android:text="@string/no_class"
         android:textSize="18sp" />
 
@@ -18,10 +19,9 @@
         android:id="@+id/time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/subject_code"
-        android:layout_below="@+id/subject_code"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="12dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/subject_code"
+        android:padding="5dp"
         android:text="@string/no_class"
         android:textSize="18sp" />
 
@@ -29,19 +29,21 @@
         android:id="@+id/subject_teacher"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/subject_value"
-        android:layout_alignTop="@+id/time_value"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/subject_code"
         android:gravity="right"
+        android:padding="5dp"
         android:text="@string/loading_name_value"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/subject_value"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/subject_code"
-        android:layout_marginEnd="20dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/no_class"
         android:textColor="@android:color/black"
         android:textSize="18sp"

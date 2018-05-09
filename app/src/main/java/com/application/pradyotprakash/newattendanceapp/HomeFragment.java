@@ -4,12 +4,15 @@ package com.application.pradyotprakash.newattendanceapp;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -100,6 +103,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+        DividerItemDecoration horizontalDecoration = new DividerItemDecoration(mSubjectListView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        Drawable horizontalDivider = ContextCompat.getDrawable(getContext(), R.drawable.horizontal_divider);
+        horizontalDecoration.setDrawable(horizontalDivider);
+        mSubjectListView.addItemDecoration(horizontalDecoration);
         mFirestore3 = FirebaseFirestore.getInstance();
         mFirestore4 = FirebaseFirestore.getInstance();
         mFirestore2 = FirebaseFirestore.getInstance();
