@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class DetailsFragment extends Fragment {
     private List<StudentSubjects> subjectList;
     private StudentSubjectRecyclerAdapter subjectRecyclerAdapter;
     private FirebaseAuth mAuth;
-    private Button otherSemesterDetails;
+    private Button otherSemesterDetails, seeTimetable;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -186,6 +187,14 @@ public class DetailsFragment extends Fragment {
                     intent.putExtra("branch", branch);
                     startActivity(intent);
                 }
+            }
+        });
+        seeTimetable = view.findViewById(R.id.seeTimetable);
+        seeTimetable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TimetableActivity.class);
+                startActivity(intent);
             }
         });
         return view;
