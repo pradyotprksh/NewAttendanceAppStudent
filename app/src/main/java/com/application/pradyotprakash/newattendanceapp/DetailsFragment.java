@@ -1,6 +1,7 @@
 package com.application.pradyotprakash.newattendanceapp;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,7 @@ public class DetailsFragment extends Fragment {
     private StudentSubjectRecyclerAdapter subjectRecyclerAdapter;
     private FirebaseAuth mAuth;
     private Button otherSemesterDetails, seeTimetable;
+    public StudentMainActivity activity;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -109,7 +112,10 @@ public class DetailsFragment extends Fragment {
                         try {
                             Glide.with(getActivity()).setDefaultRequestOptions(placeHolderRequest).load(image).into(studentImage);
                         } catch (Exception e) {
-                            Toast.makeText(getContext(), "...", Toast.LENGTH_SHORT).show();
+                            try {
+                                Toast.makeText(getContext(), "...", Toast.LENGTH_SHORT).show();
+                            } catch (Exception e1) {
+                            }
                         }
                         try {
                             proctorId = task.getResult().getString("proctor");
@@ -148,7 +154,7 @@ public class DetailsFragment extends Fragment {
                                 }
                             }
                         });
-                        mFirestore2.collection("Subject").document(branch).collection(semester).addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                        mFirestore2.collection("Subject").document(branch).collection(semester).addSnapshotListener(activity, new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                                 subjectRecyclerAdapter.notifyDataSetChanged();
@@ -198,6 +204,12 @@ public class DetailsFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (StudentMainActivity) activity;
     }
 
 }

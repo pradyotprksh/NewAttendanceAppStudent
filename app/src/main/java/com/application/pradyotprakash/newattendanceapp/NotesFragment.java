@@ -1,6 +1,7 @@
 package com.application.pradyotprakash.newattendanceapp;
 
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ public class NotesFragment extends Fragment {
     private List<NoteList> notesList;
     private NoteListRecyclerAdapter noteRecyclerAdapter;
     private FirebaseFirestore mFirestore, mFirestore1;
+    public StudentMainActivity activity;
 
     public NotesFragment() {
         // Required empty public constructor
@@ -70,7 +72,7 @@ public class NotesFragment extends Fragment {
                         branch = task.getResult().getString("branch");
                         semesterValue = task.getResult().getString("semester");
                         classValue = task.getResult().getString("className");
-                        mFirestore.collection("Notes").document(branch).collection(semesterValue).document(classValue).collection("Uploaded").orderBy("uploadedOn").addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                        mFirestore.collection("Notes").document(branch).collection(semesterValue).document(classValue).collection("Uploaded").orderBy("uploadedOn").addSnapshotListener(activity, new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                                 for (DocumentChange documentChange : documentSnapshots.getDocumentChanges()) {
@@ -93,6 +95,12 @@ public class NotesFragment extends Fragment {
         horizontalDecoration.setDrawable(horizontalDivider);
         noteList.addItemDecoration(horizontalDecoration);
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (StudentMainActivity) activity;
     }
 
 }

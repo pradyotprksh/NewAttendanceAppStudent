@@ -1,6 +1,7 @@
 package com.application.pradyotprakash.newattendanceapp;
 
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment {
     private List<NewNotes> newNoteslist;
     private List<NewNotification> newNotificationList;
     private StudentHomeRecyclerAdapter subjectRecyclerAdapter;
-    private FirebaseFirestore mFirestore, mFirestore1, mFirestore2, mFirestore3, mFirestore4, mFirestore5, mFirestore6;
+    private FirebaseFirestore mFirestore, mFirestore1, mFirestore2, mFirestore3, mFirestore4, mFirestore5, mFirestore6, mFirestore7;
     private String classValue;
     private String todayDay;
     private TextView noClassBanner;
@@ -66,6 +68,7 @@ public class HomeFragment extends Fragment {
     private ConstraintLayout firstNote, secondNote, firstNotification, secondNotification;
     private long queueId;
     private DownloadManager downloadManager;
+    private StudentMainActivity activity;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -77,7 +80,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
-        classValue = StudentMainActivity.getClassValue();
         todayDay = getCurrentDay();
         mSubjectListView = view.findViewById(R.id.today_classlist);
         mSubjectListView.setVisibility(View.INVISIBLE);
@@ -89,16 +91,29 @@ public class HomeFragment extends Fragment {
         mSubjectListView.setLayoutManager(new LinearLayoutManager(getContext()));
         mSubjectListView.setAdapter(subjectRecyclerAdapter);
         mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("Timetable").document(classValue).collection(todayDay).orderBy("from").addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+        mFirestore7 = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        student_id = mAuth.getCurrentUser().getUid();
+        mFirestore7.collection("Student").document(student_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                        mSubjectListView.setVisibility(View.VISIBLE);
-                        noClassBanner.setVisibility(View.INVISIBLE);
-                        Home subjects = doc.getDocument().toObject(Home.class);
-                        subjectList.add(subjects);
-                        subjectRecyclerAdapter.notifyDataSetChanged();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        classValue = task.getResult().getString("className");
+                        mFirestore.collection("Timetable").document(classValue).collection(todayDay).orderBy("from").addSnapshotListener(activity, new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        mSubjectListView.setVisibility(View.VISIBLE);
+                                        noClassBanner.setVisibility(View.INVISIBLE);
+                                        Home subjects = doc.getDocument().toObject(Home.class);
+                                        subjectList.add(subjects);
+                                        subjectRecyclerAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            }
+                        });
                     }
                 }
             }
@@ -111,8 +126,6 @@ public class HomeFragment extends Fragment {
         mFirestore3 = FirebaseFirestore.getInstance();
         mFirestore4 = FirebaseFirestore.getInstance();
         mFirestore2 = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        student_id = mAuth.getCurrentUser().getUid();
         newNoteslist = new ArrayList<>();
         noteName = view.findViewById(R.id.noteName);
         noteDescription = view.findViewById(R.id.noteDescription);
@@ -144,7 +157,7 @@ public class HomeFragment extends Fragment {
                                         .document(task.getResult().getString("className"))
                                         .collection("Uploaded")
                                         .orderBy("uploadedOn", Query.Direction.DESCENDING)
-                                        .addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                                        .addSnapshotListener(activity, new EventListener<QuerySnapshot>() {
                                             @Override
                                             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                                                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
@@ -434,6 +447,12 @@ public class HomeFragment extends Fragment {
                 return "Saturday";
         }
         return "Wrong Day";
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (StudentMainActivity) activity;
     }
 
 }
