@@ -59,4 +59,18 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/addNumberOfCopies"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/noteName"
+        android:layout_marginTop="122dp"
+        android:backgroundTint="@color/colorAccent"
+        android:padding="10dp"
+        android:text="Number of Xerox Copy"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
 </RelativeLayout>

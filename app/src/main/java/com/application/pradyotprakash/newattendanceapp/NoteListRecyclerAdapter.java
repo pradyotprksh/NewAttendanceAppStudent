@@ -1,5 +1,7 @@
 package com.application.pradyotprakash.newattendanceapp;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,16 +15,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecyclerAdapter.ViewHolder> {
@@ -34,11 +40,14 @@ public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecycl
     private String noteId, fileLink;
     private long queueId;
     private DownloadManager downloadManager;
-    private FirebaseFirestore mFirestore;
+    private FirebaseFirestore mFirestore, mFirestore1, mFirestore2;
+    private Activity activity;
+    private long copies;
 
-    public NoteListRecyclerAdapter(List<NoteList> noteList, Context context) {
+    public NoteListRecyclerAdapter(List<NoteList> noteList, Context context, Activity activity) {
         this.noteList = noteList;
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -53,6 +62,8 @@ public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecycl
         user_id = mAuth.getCurrentUser().getUid();
         String uploadedBy = noteList.get(position).getUploadedBy();
         mFirestore = FirebaseFirestore.getInstance();
+        mFirestore1 = FirebaseFirestore.getInstance();
+        mFirestore2 = FirebaseFirestore.getInstance();
         mFirestore.collection("Faculty").document(uploadedBy).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -98,6 +109,60 @@ public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecycl
                 queueId = downloadManager.enqueue(request);
             }
         });
+        holder.addCopies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.addCopies.getText().equals("Number of Xerox Copy")) {
+                    final Dialog d = new Dialog(activity);
+                    d.setTitle("NumberPicker");
+                    d.setContentView(R.layout.dialog);
+                    Button b1 = d.findViewById(R.id.button1);
+                    Button b2 = d.findViewById(R.id.button2);
+                    final NumberPicker np = d.findViewById(R.id.numberPicker1);
+                    np.setMaxValue(100);
+                    np.setMinValue(0);
+                    np.setWrapSelectorWheel(false);
+                    b1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            holder.addCopies.setText(String.valueOf(np.getValue()));
+                            d.dismiss();
+                        }
+                    });
+                    b2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            d.dismiss();
+                        }
+                    });
+                    d.show();
+                } else {
+                    mFirestore2.collection("Notes").document(noteList.get(position).getName() + noteList.get(position).getTitle() + noteList.get(position).getUploadedOn()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                if (task.getResult().exists()) {
+                                    try {
+                                        copies = task.getResult().getLong("copies");
+                                    } catch (Exception e) {
+                                        copies = 0;
+                                    }
+                                    HashMap<String, Object> newCopies = new HashMap<>();
+                                    newCopies.put("copies", copies + Long.valueOf(holder.addCopies.getText().toString()));
+                                    mFirestore1.collection("Notes").document(noteList.get(position).getName() + noteList.get(position).getTitle() + noteList.get(position).getUploadedOn()).update(newCopies).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(context, "Order Placed", Toast.LENGTH_SHORT).show();
+                                            holder.addCopies.setText("Number of Xerox Copy");
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
@@ -109,6 +174,7 @@ public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecycl
 
         private View mView;
         private TextView noteName, noteDescription, noteUploadedOn, noteUploadedBy;
+        private Button addCopies;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -117,6 +183,7 @@ public class NoteListRecyclerAdapter extends RecyclerView.Adapter<NoteListRecycl
             noteDescription = mView.findViewById(R.id.noteDescription);
             noteUploadedOn = mView.findViewById(R.id.noteUploadedOn);
             noteUploadedBy = mView.findViewById(R.id.noteUploadedBy);
+            addCopies = mView.findViewById(R.id.addNumberOfCopies);
         }
     }
 }

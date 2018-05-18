@@ -57,7 +57,7 @@ public class NotesFragment extends Fragment {
         mFirestore = FirebaseFirestore.getInstance();
         noteList = view.findViewById(R.id.noteList);
         notesList = new ArrayList<>();
-        noteRecyclerAdapter = new NoteListRecyclerAdapter(notesList, getContext());
+        noteRecyclerAdapter = new NoteListRecyclerAdapter(notesList, getContext(), getActivity());
         noteList.setHasFixedSize(true);
         noteList.setLayoutManager(new LinearLayoutManager(getContext()));
         noteList.setAdapter(noteRecyclerAdapter);
